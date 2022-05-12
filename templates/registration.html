@@ -11,14 +11,31 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/static/style.css" />
-    <title>Log In Page</title>
+    <title>Registration Page</title>
   </head>
   <body class="text-center">
-    <div class="container">
+    <div class="container" id="registrationForm">
       <div class="form-signin bg-light">
         <form>
-          <h1 class="h3 mt-3 mb-5 fw-bold">Incident Tracker</h1>
-
+          <h1 class="h3 mt-3 mb-5 fw-bold">Register as new user</h1>
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+              id="floatingInput"
+              placeholder="First Name"
+            />
+            <label for="floatingInput">First Name</label>
+          </div>
+          <div class="form-floating mt-2">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+            />
+            <label for="floatingInput">Last Name</label>
+          </div>
           <div class="form-floating">
             <input
               type="email"
@@ -37,21 +54,23 @@
             />
             <label for="floatingPassword">Password</label>
           </div>
-
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" value="remember-me" /> Remember me
-            </label>
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              id="floatingPassword"
+              placeholder="Confirm Password"
+            />
+            <label for="floatingPassword">Confirm Password</label>
           </div>
-          <button class="w-100 mb-5 btn btn-lg btn-outline-dark" type="submit">
-            Sign in
+          <div class="checkbox mb-3">
+          </div>
+          <button class="w-75 mb-5 btn-sm btn-outline-dark" type="submit">
+            Sign up
           </button>
 
           <div class="small text-muted">
-            Forgot password? <a href="#">Reset</a>
-          </div>
-          <div class="small text-muted">
-            Not a user? <a href="#">Create an Account</a>
+            Already have an account? <a href="#">Sign In</a>
           </div>
           <div class="small text-muted">
             Sign in as a <a href="#">Demo User</a>
