@@ -10,12 +10,89 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Dashboard</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand fs-3" href="#">Project Tracker</a>
+        <ul class="navbar-nav me-auto mt-2 mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="/dashboard">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/projects/new"
+              >Create new project</a
+            >
+          </li>
+        </ul>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+               data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+               aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon"></span>
+               </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                     <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+               <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-info" type="submit">Search</button>
+               </form>
+         </div> -->
+        <a href="/logout" class="btn btn-primary btn-sm">logout</a>
+      </div>
+    </nav>
     <div class="container">
-      <div class="container">
-        <h1>Welcome!!!</h1>
+      <div class="mt-5 container">
+        <h1>Welcome {{ user.first_name | capitalize }}!</h1>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mt-5 mb-5 container">
+        <h3 class="text-center">Projects</h3>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Lead</th>
+              <th scope="col">Date Due</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for project in projects%}
+            <tr>
+              <td>{{project.projectName}}</td>
+              {% for user in users%} {% if user.id == project.user_id%}
+              <td>{{user.first_name}} {{user.last_name}}</td>
+              {% endif %} {% endfor %}
+              <td>{{project.due_date.strftime('%m-%d-%Y')}}</td>
+              <td>
+                <a
+                  class="btn btn-sm btn-primary"
+                  href="/projects/view/{{project.id}}"
+                  >Details</a
+                >
+                {% if project.user_id == session.user_id %}
+                <!-- if the user is logged in they can view edit and delete buttons for the recipes that they have created. -->
+                <a
+                  class="btn btn-sm btn-primary"
+                  href="/projects/edit/{{project.id}}"
+                  >Edit</a
+                >
+                <a
+                  class="btn btn-sm btn-primary"
+                  href="/projects/delete/{{project.id}}"
+                  >Delete</a
+                >
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
     <script

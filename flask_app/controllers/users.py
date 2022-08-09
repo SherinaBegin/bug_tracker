@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, session, flash
 
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.project import Project
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -53,7 +54,8 @@ def dashboard():
     }
     user = User.get_user_by_id(data)
     users = User.get_all_users()
-    return render_template('dashboard.html', users=users, user=user)
+    projects = Project.get_all_projects()
+    return render_template('dashboard.html', users=users, user=user, projects=projects)
 
 
 @app.route('/logout')
