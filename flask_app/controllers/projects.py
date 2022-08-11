@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, session, flash
 from flask_app import app
 from flask_app.models.user import User
 from flask_app.models.project import Project
+from flask_app.models.bug import Bug
 
 
 # CREATE
@@ -40,7 +41,8 @@ def view_project(project_id):
     }
    #  # project information
     project_data = Project.get_one_project(data)
-    return render_template('view_project.html', project=project_data, user=User.get_user_by_id(data), users=User.get_all_users())
+    all_bugs = Bug.get_all_bugs()
+    return render_template('view_project.html', project=project_data, user=User.get_user_by_id(data), users=User.get_all_users(), bugs=all_bugs)
 # UPDATE
 
 # DELETE

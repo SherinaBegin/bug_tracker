@@ -9,7 +9,7 @@ class Bug:
         self.id = data['id']
         self.issue = data['issue']
         self.description = data['description']
-        self.priorityLeve = data['priorityLevel']
+        self.priorityLevel = data['priorityLevel']
         self.status = data['status']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -30,8 +30,8 @@ class Bug:
     @classmethod
     def get_all_bugs(cls):
         query = """
-      SELECT * FROM bugs;
-      """
+      SELECT * FROM bugs
+      ;"""
         results = connectToMySQL(cls.db).query_db(query)
         bugs = []
         for row in results:
@@ -52,9 +52,22 @@ class Bug:
 
     # DELETE
     @classmethod
-    def destroy_project(cls, data):
+    def destroy_bug(cls, data):
         query = """
        DELETE FROM bugs
        WHERE id = %(id)s
        """
         return connectToMySQL(cls.db).query_db(query, data)
+
+    # VALIDATE
+
+    @staticmethod
+    def validate_bug(bug):
+        is_valid = True
+        if len(bug['issue']) < 2:
+            is_valid = False
+            flash("Issue must be at least 2 characters long")
+        if len(bug['description']) < 2:
+            is_valid = False
+            flash('Description must be longer than 2 characters')
+        return is_valid
