@@ -53,7 +53,7 @@ def bug_edit(bug_id):
         'id': bug_id
     }
     bug_data = Bug.get_one_bug(data)
-    return render_template('edit_bug.html', bug=bug_data, users=User.get_all_users())
+    return render_template('update_bug.html', bug=bug_data, users=User.get_all_users())
 
 
 @app.route('/bugs/update/<int:bug_id>', methods=['POST'])

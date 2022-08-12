@@ -10,7 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <title>Dashboard</title>
+    <title>Create Issue</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,7 +43,14 @@
      
       <div class="container">
          <div class="card mt-5 mx-auto w-50 shadow p-3 mb-5 bg-body rounded">
-            <div class="text-center fs-4">Create Issue</div>
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+             {% for message in messages %}
+                <p>{{message}}</p>
+             {% endfor %}
+          {% endif %}
+          {% endwith %}  
+          <div class="text-center fs-4">Create Issue</div>
             <div class="card-body">
                <form action="/bugs/create" method="post">
                   <div class="row justify-content-center">

@@ -46,8 +46,17 @@ class Project:
         return cls(result[0])
 
    # UPDATE
-
+    @classmethod
+    def update_project(cls, data):
+        query = """
+        UPDATE projects 
+        SET projectName = %(projectName)s,
+            due_date = %(due_date)s
+        WHERE id = %(id)s
+        ;"""
+        return connectToMySQL(cls.db).query_db(query, data)
    # DELETE
+
     @classmethod
     def destroy_project(cls, data):
         query = """
@@ -63,7 +72,7 @@ class Project:
         if len(project['projectName']) < 3:
             is_valid = False
             flash("Name must be at least 3 characters long")
-        if ValueError:
+        if len(project['due_date']) < 6:
             is_valid = False
             flash("Please enter a date")
         return is_valid
