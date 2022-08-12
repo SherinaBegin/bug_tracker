@@ -42,15 +42,28 @@ class Bug:
     @classmethod
     def get_one_bug(cls, data):
         query = """
-      SELECT * FROM bugs 
+      SELECT * FROM bugs
       WHERE id = %(id)s
       ;"""
         result = connectToMySQL(cls.db).query_db(query, data)
         return cls(result[0])
 
     # UPDATE
-
+    @classmethod
+    def update_bug(cls, data):
+        query = """
+        UPDATE bugs
+        SET issue = %(issue)s,
+            description = %(description)s,
+            priorityLevel = %(priorityLevel)s,
+            status = %(status)s,
+            project_id = %(project_id)s,
+            user_id = %(user_id)s
+        WHERE id = %(id)s
+        ;"""
+        return connectToMySQL(cls.db).query_db(query, data)
     # DELETE
+
     @classmethod
     def destroy_bug(cls, data):
         query = """

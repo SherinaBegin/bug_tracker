@@ -42,7 +42,7 @@ def view_project(project_id):
    #  # project information
     project_data = Project.get_one_project(data)
     all_bugs = Bug.get_all_bugs()
-    return render_template('view_project.html', project=project_data, user=User.get_user_by_id(data), users=User.get_all_users(), bugs=all_bugs)
+    return render_template('view_project.html', project=project_data, user=User.get_user_by_id(user_data), users=User.get_all_users(), bugs=all_bugs)
 # UPDATE
 
 # DELETE
